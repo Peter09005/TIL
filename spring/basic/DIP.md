@@ -26,5 +26,11 @@ OCP , DIP 법칙을 따르지 않는 모습이다.
 Drive에 Car을 생성한다는 역할을 구분하면된다. 
 
 ```java
-
+public class CarConfig{
+	public Car car(){
+		return new CarA()
+	}
+}
 ```
+
+CarConfig 를 사용하면 차를 바꿀때 Config 설정만 변경해주면 의존성을 주입해준다. 
