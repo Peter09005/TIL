@@ -1,6 +1,6 @@
 # My TIL Record
 
 
-[[쓰레드]]
+[[volatile , 메모리 가시성]]
 [[spring poly]]
 
