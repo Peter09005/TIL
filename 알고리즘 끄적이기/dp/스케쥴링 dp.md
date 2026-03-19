@@ -18,3 +18,5 @@ dp[i + time] = max(dp[i] + price, dp[i + time])
 하면서 업데이트 해뒀음. 
 
 
+
+
