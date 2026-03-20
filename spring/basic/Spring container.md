@@ -134,10 +134,11 @@ Configuration 빈을 보면 orderService, memberService 를 호출하게 되면 
 AppConfig ----> class AppConfig@CGLIB extends AppConfig {...}
 ```
 
-CGLIB는 스프링 컨테이너가 만들어질때 AppConfig를 상속받는 자식 클래스를 메모리에 동적으로 만들어냄 
-
-이 자식클래스는 
-
-intercept 메소드에서 컨테이너에 빈이 있는지 확인후 있으면 기존 빈을 반환, 없다면 
-
-객체 생성하고 반환 그 후 스프링 컨테이너에 빈으로 등록 
+1. CGLIB는 스프링 컨테이너가 만들어질때 AppConfig를 상속받는 프록시를 메모리에 동적으로 만들어냄 이 자식클래스는 AppConfig에 있는 모든 @Bean 메소드를 오버라이딩 함
+  ↓
+2.  외부에서 프록시 객체의 memberRepository()가 호출되면 프록시에 오버라이딩된 memberReposirtory( )가 실행됨 
+  ↓
+3. 오버라이딩 한 메소드 내부에는 intercept() 라는 메소드가 있는데, 외부에서 프록시 객체의 메소드를 호출하면 이 함수를 통해 제어권을 가져감
+  ↓
+4. intercept() 메소드에서 컨테이너에 빈이 있는지 확인후 있으면 기존 빈을 반환,
+   컨테이너에 없다면 cglibMethodProxy.invokeSuper()로 진짜 memberRepository 가 실행됨 
