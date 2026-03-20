@@ -96,4 +96,48 @@ private static final SingletonService instance = new SingletonService();
 #### 싱글톤 방식의 주의점
 
 많은 사용자가 동시에 동일한 메모리에 있는 객체를 사용하다보니 , 공유자원이 존재하면 문제가 생긴다 
-싱글톤 
+싱글톤 객체는 항상 무상태로 설계해야한다.
+
+
+#### Configuration 과 싱글톤 
+
+~~~java
+@Configuration  
+public class AppConfig {  
+    @Bean  
+    public MemberService memberService(){  
+        return new MemberServiceImpl(memberRepository());  
+    }  
+    @Bean  
+    public OrderService orderService(){  
+        return new OrderServiceImpl(memberRepository(),discountPolicy());  
+    }  
+    @Bean  
+    public DiscountPolicy discountPolicy(){  
+        return new RateDiscountPolicy();  
+    }  
+    @Bean  
+    public MemberRepository memberRepository(){  
+        return new MemoryRepository();  
+    }  
+}
+~~~
+
+Configuration 빈을 보면 orderService, memberService 를 호출하게 되면 두 메소드는 memberRepository 메소드를 실행해 객체를 생성하는것처럼 보인다. 
+
+직관적으로는 2개의 객체가 만들어져 싱글톤 패턴이 깨진것 처럼 보이지만, 
+사실은 그렇지않다. 
+
+스프링은 클래스의 바이트코드를 조작하는 라이브러리를 사용해 위 문제를 해결했다. 
+
+```        
+AppConfig ----> class AppConfig@CGLIB extends AppConfig {...}
+```
+
+CGLIB는 스프링 컨테이너가 만들어질때 AppConfig를 상속받는 자식 클래스를 메모리에 동적으로 만들어냄 
+
+이 자식클래스는 
+
+intercept 메소드에서 컨테이너에 빈이 있는지 확인후 있으면 기존 빈을 반환, 없다면 
+
+객체 생성하고 반환 그 후 스프링 컨테이너에 빈으로 등록 
