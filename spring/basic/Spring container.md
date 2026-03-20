@@ -4,7 +4,7 @@ ApplicationContext 를 스프링 컨테이너라고 한다
 컨테이너에 빈을 등록시키는 방법은 다양하지만 먼저 Config.class 를 만들어 직접 넣어주는 방법부터 알아보자
 
 
-### Config.class 
+#### Config.class 
 
 ```java
 @Configuration
@@ -22,7 +22,7 @@ public class Config{
 ```
 
 
-### Test.Main 
+#### Test.Main 
 
 ```java
 ApplicationContext ac;
@@ -39,7 +39,7 @@ HashMap<String,Car> hashMap = ac.getBeansOfType(Car.class) // ok
 
 부모타입으로 조회하면, 주식 타입도 함께 조회한다. 
 
-### 싱글톤 
+#### 싱글톤 
 
 ~~~java
 void pureContainer(){  
@@ -77,12 +77,23 @@ public class SingletonService{
 }
 ~~~
 
-#### 싱글톤패턴
+#### 싱글톤패턴의 문제
 
 ~~~java
 private static final SingletonService instance = new SingletonService();
 
 /*SingletonSerive는 DIP를 위반했다. 
-클라이언트가 구체클래스인 SingletonService에 의존하고 있어 OCP 원칙을 위반할수있다.*/ 
+*클라이언트가 구체클래스인 SingletonService에 의존하고 있어 OCP 원칙을 위반할수있다.
+*생성자가 private이라 자식 클래스로 확장시키기도 어렵고, 내부속성을 변경하거나 초기화하기도 힘들다. 
+*/ 
 ~~~
 
+#### 싱글톤 컨테이너 
+
+스프링 컨테이너에서 관리되는 스프링 빈의 기본 등록방식은 싱글톤으로 관리된다. 
+스프링이 싱글톤패턴의 문제를 다 관리해주기 때문에, 코딩하기가 훨씬 편해졌다. 
+
+#### 싱글톤 방식의 주의점
+
+많은 사용자가 동시에 동일한 메모리에 있는 객체를 사용하다보니 , 공유자원이 존재하면 문제가 생긴다 
+싱글톤 
