@@ -142,3 +142,59 @@ AppConfig ----> class AppConfig@CGLIB extends AppConfig {...}
   ↓
 4. intercept() 메소드에서 컨테이너에 빈이 있는지 확인후 있으면 기존 빈을 반환,
    컨테이너에 없다면 cglibMethodProxy.invokeSuper()로 진짜 memberRepository 가 실행됨 
+
+#### 스프링 컨테이너와 ComponentScan 
+
+```java
+@Configuration
+@ComponentScan 
+public class AutoConfig{
+	
+}
+```
+
+@ComponentScan -> @Component로 설정되어있는 클래스를 전부 스캔해 컨테이너에 빈으로 등록해준다 
+
+빈으로 설정할 클래스는 위에 @Component 애노테이션을 붙여줘야함.
+
+등록될 빈의 이름은 보통 Class의 앞 대문자를 소문자로 바꾼형태로 저장되는게 기본이고, 
+Component("name") 으로 이름을 변경할 수 있다. 
+
+```java
+@Component
+public class A{
+	private final B b;
+	private final C c;
+
+	@Autowired
+	public A(B b,C c){
+		this.b = b;
+		this.c = b; 
+	}
+}
+```
+
+이런 경우 의존관계를 주입해줘야 하는 상황인데, 컴포넌트 스캔만으로는 의존관계까진 알수없다. 
+의존관계를 주입받은 메소드에 @Autowired 애노테이션을 붙여주면 컨테이너에 저장되어있는 
+객체를 가져와 주입시켜준다. 
+
+#### 스캔의 범위
+
+ComponentScan에 basePackages = "패키지 디렉토리" 를 설정해주면 해당 디렉토리부터 스캔한다. 
+
+지정하지 않으면 @ComponentScan이 붙은 설정정보의 패키지부터 스캔한다.
+
+#### 스캔 필터 
+
+```java
+@ComponentScan(
+	includeFilters = @Filter(type = FilterType.ANNOTATION, 
+	classes = MyIncludeComponent.class), 
+	excludeFilters = @Filter(type = FilterType.ANNOTATION,
+	classes = MyExcludeComponent.class)
+	)
+)
+```
+
+ComponentScan 에 필터 옵션을 넣어주면 스캔할때 필터 옵션에 맞춰 알아서 컨테이너에 등록해준다. 
+
