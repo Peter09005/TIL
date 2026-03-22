@@ -171,6 +171,10 @@ public class A{
 		this.b = b;
 		this.c = b; 
 	}
+	
+	public A(B b){
+		this.b = b; 
+	}
 }
 ```
 
