@@ -202,3 +202,14 @@ ComponentScan에 basePackages = "패키지 디렉토리" 를 설정해주면 해
 
 ComponentScan 에 필터 옵션을 넣어주면 스캔할때 필터 옵션에 맞춰 알아서 컨테이너에 등록해준다. 
 
+#### lombok 
+
+
+
+#### DI 과정에서 타입이 같은 빈이 여러개일떄
+
+1. Autowired
+
+2. Qualifier
+
+3. Primary
