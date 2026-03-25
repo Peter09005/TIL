@@ -79,7 +79,29 @@ age = 10 , name = "hwang" 을 전달해도 결국 FileWriter를 거치면 String
 DataOutputStream으로 개선해줄순 있지만 결국 필드 하나하나 조회하면서 타입에 따라 다른 메소드를 호출해서 넣어주는 작업을 거쳐야하므로 귀찮다. 
 ```
 
-객체를 애초에 저장할때부터 메모리에 직렬로 보관하면 편하지 않을까? 
+#### Serializable 
 
-애초에 물리RAM에서는 객체를 연속해서 저장해두지 않는다. 
-객체 단위로 I/O를 하려면 Outpu
+1. 자바는 객체의 정보를 다 알고있다. 하지만 객체 단위로 이동을 시키면 
+	보안상 위험할수있다. 
+
+2. HDD 에서 읽을때 HDD에는 그저 바이트 단위로 값만 저장되어있다. 
+	자바에서 read을 할때 그 값이 객체인지 모른다.
+
+
+따라서 자바는 Serializable 인터페이스를 제공하는데 해당 인터페이스를 사용하면 
+객체 단위로 읽고 쓸수있다. 
+
+~~~java
+??srjava.util.ArrayListx????a?Isizexpwsrio.member.Member????0RMLagetLjava/ lang/Integer;LidtLjava/lang/String;Lnameq~xpsrjava.lang.Integer⠤??? 8Ivaluexrjava.lang.Number???  
+???xptid1tname1sq~sq~tid2tname2x
+~~~
+
+읽을때 무슨 객체인지 알려주는 설정 정보가 들어있다. 
+
+자바입장에서는 클래스 구조를 전부 알아야 읽을때 조립을 할수있기에 클래스 구조가 변경되면 호환성 문제가 발생한다. 게다가 클래스는 자바 플랫폼에 종속적이라 다른 언어나 시스템과의 상호작용이 떨어진다. 
+
+-> 비용, 성능, 유연성 다 딱히 좋진않다. 
+
+그래서 우리는 JSON을 표준으로 데이터를 교환한다 ^^
+
+JSON 은 근데 String기반이라 단점도 분명 존재해서.. Protobuf도 고려해봐야겠다. 
