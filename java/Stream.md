@@ -59,3 +59,27 @@ HELLO GOOD WORLD ....
 이런식으로 두 정보가 아예 섞여버리는 경우도 발생한다. 
 
 이런 경우는 전담 쓰레드를 두던가, buffered 를 늘리던가, 파일락을 걸던가 해야한다. 
+
+#### 객체 스트림
+
+```java
+class Member{
+	int age; 
+	String name; 
+}
+
+member.dat 에 age , name 저장되어있다 가정
+
+FileWriter() -> 
+
+"ABC" -> FileWriter -> 주어진 인코딩 방식으로 byte로 변환 -> FileOutputStream이 파일에 작성 
+
+age = 10 , name = "hwang" 을 전달해도 결국 FileWriter를 거치면 String 으로 encoding된다. 결국 읽을때나 Member 객체를 초기화 해줄떄 decoding을 귀찮게 거쳐야한다. 
+
+DataOutputStream으로 개선해줄순 있지만 결국 필드 하나하나 조회하면서 타입에 따라 다른 메소드를 호출해서 넣어주는 작업을 거쳐야하므로 귀찮다. 
+```
+
+객체를 애초에 저장할때부터 메모리에 직렬로 보관하면 편하지 않을까? 
+
+애초에 물리RAM에서는 객체를 연속해서 저장해두지 않는다. 
+객체 단위로 I/O를 하려면 Outpu
