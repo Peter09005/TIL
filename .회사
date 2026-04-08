@@ -1,0 +1,42 @@
+=================================== 4/08 
+Docker를 활용하여 Elasticsearch 및 Kibana 컨테이너 환경을 독립적으로 구축.
+RDBMS의 정규화된 스키마를 검색 효율을 높이기 위해 Elasticsearch 문서 구조에 맞게 역정규화하는 전략을 수립.
+ETL 파이프라인 개념 정립: DB의 특정 필드를 추출(Extract), 변환(Transform)하여 Elasticsearch에 적재(Load)하는 인덱싱 프로세스를 이해하고 적용.
+barker 소스 분석 
+
+test_cases.md 생성 후 성능판단 
+
+############ 데이터베이스 추출 로직 
+
+bulker.java -> DFLoader.java -> BaseBulkerService.java -> JdbcDAO.java 
+
+DFLoader - df.xml -> key_query , data_query 를 읽음 
+
+BaseBulkerService.java -> key_query 실행후 data_query 실행 
+
+key_query 로 id 뽑고  data_query 는 id에 해당하는 문서 1건만 만듬 
+
+############# 예시 
+key_query 1번
+  -> doc_id 목록 10개 생성
+
+for each doc_id:
+  data_query 1번 실행
+  -> 문서 1건 생성
+
+문서들을 모아 ES bulk 전송
+
+############ ES bulk 메커니즘 
+
+data_query -> 벌커 엔진 -> ES bulk JSON 으로 바꿔 파일에 씀 
+
+파일 -> IndexService -> ES Bulk API 로 보냄 -> ES 에서 Indexing 
+
+=================================
+barker 소스 리팩토링 
+DI 부분 springboot 기반 DI 로 수정 
+
+customer <-> core 분리 
+
+모니터링 , 관제 시스템 추가 
+실행환경 sh -> docker 추가 
