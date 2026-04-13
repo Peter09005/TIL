@@ -25,7 +25,6 @@ for each doc_id:
   -> 문서 1건 생성
 
 문서들을 모아 ES bulk 전송
-
 ############ ES bulk 메커니즘 
 
 data_query -> 벌커 엔진 -> ES bulk JSON 으로 바꿔 파일에 씀 
@@ -40,3 +39,8 @@ customer <-> core 분리
 
 모니터링 , 관제 시스템 추가 
 실행환경 sh -> docker 추가 
+
+# 4/13 
+- rest api 학습
+- 로그인 기능에 observer 패턴 적용, 로그인/ 로그아웃시 update , created, loginAt .. 자동 update 후 db에 update 
+- jpa paging 기법 login 시스템에 적용
