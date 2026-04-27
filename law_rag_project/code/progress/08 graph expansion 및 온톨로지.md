@@ -61,5 +61,8 @@ reranker + hybrid
 ## 개선안 2 
 
 **색인** 이전 데이터에 **LLM** 을 활용해 chunk 단위에 **Contextual Retrieval** 데이터 붙이기 
--> **BGE
+-> **BGE/M3** 의 벡터화가 정확해질 가능성 **매우 높음** 
+
+
+
 
