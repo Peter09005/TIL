@@ -81,7 +81,10 @@ top1_accuracy = 0.8889
 top5_hit_count = 81
 miss_count = 0
 
+
+
 ### B결과 (변경 후)
+### BASE LINE 
 
 total_score = 76.9
 avg_score = 0.9494
@@ -213,10 +216,13 @@ query keyword -> nori -> 상위 5개 단어 추출
 현재 graph expansion 없이 순수 
 hybrid retrieval + bge/m3 reranker 로는 아래 결과물이 최선인거같음 
 
+일단 현재까지 가장 효율이 좋았던 [[#BASE LINE]] 으로 다시 rollback 한뒤, graph expansion을 활용해서 
+더 개선해보겠다. 
 
-~~~
+## 지금은 안쓰지만 나중에 적용해볼만한것 
 
+1. query -> nori_analyzer -> 질의 토큰화 -> 질의의미가 더 강해짐 
 
+2. 핵심 근거 들어가는 내용이 조금 아쉬움 -> 더 확실하게 핵심근거만 넣고, 문맥도 파악할수있게끔해야함. 
 
-
-~~~
+3. 지금 [[#문제]] 를 rollback해서 해결 못한 상황이라, 이것도 해결해야됨. 

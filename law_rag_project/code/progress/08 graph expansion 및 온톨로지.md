@@ -12,3 +12,43 @@
 
 따라서 현재 구조에서 뽑은 hybrid 15 중에서 **graph ontology** 를 만들어 reranker의 성능을 높혀보겠다. 
 
+현재 큰 pipeline은 다음과 같다 
+
+~~~text
+검색 
+ |
+ |
+하이브리드 
+ |
+ |
+reranker + hybrid 
+~~~
+
+이를 다음과 같이 개선시키려고 한다 
+
+~~~text
+검색
+ |
+ |
+하이브리드 
+ |
+ |
+보강 - graph ontology
+ |
+ | 
+reranker + hybrid 
+~~~
+
+
+### graph ontology 도입 후 나아져야할 것 
+
+~~~text 
+1. 참조 조문 연결  
+2. 정의 조문 연결  
+3. 벌칙/과태료/처분 연결  
+4. 조-항-호-목 계층 연결  
+~~~
+
+기존에는 **reranker** 에 넣을때 계층 연결을 상위 문맥으로 연결했지만 
+**graph** 를 쓰면 더 좋은 reranker input을 넣을수있을거라 기대한다. 
+

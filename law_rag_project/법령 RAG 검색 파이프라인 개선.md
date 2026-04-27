@@ -715,6 +715,22 @@ rerank 모델을 bge-reranker-v2-m3 을 쓰다보니, 의미 분석은 잘해주
 `test2.py`의 최종 `top3`는  `dense + sparse + BM25 후보를 article_uid 기준으로 통합`한 뒤,    
 `정규화된 가중합 + overlap bonus`로 1차 정렬하고,    
 `상위 15개를 reranker로 다시 정렬한 결과의 첫 3개`다.  
+
+
+## 현재 vector search BASELINE 
+
+[[07 reranking input format 변경#BASE LINE]]
+[[07 reranking input format 변경#문제]]
+```final result with vector hybrid + reranker 
+total_score = 76.9
+avg_score = 0.9494
+matched_within_top3 = 79
+low_score_queries(<= 0.4) = 3
+top1_accuracy = 0.9012
+top5_hit_count = 81
+miss_count = 0
+```
   
 ---
 
+**ontology graph expanision** 기법이 필요할거 같음. 
