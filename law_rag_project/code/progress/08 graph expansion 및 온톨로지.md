@@ -64,5 +64,10 @@ reranker + hybrid
 -> **BGE/M3** 의 벡터화가 정확해질 가능성 **매우 높음** 
 
 
+## 개선안 3
+
+graph extension을 python으로 구현하기 
+milvus 구조 바꾸지 않고 유지할수있음 
+
 
 
