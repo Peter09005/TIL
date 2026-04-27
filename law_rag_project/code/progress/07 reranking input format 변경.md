@@ -92,3 +92,30 @@ top5_hit_count = 81
 miss_count = 0
 
 A/B 에 비해 더 좋은 결과를 냈다!
+
+### 문제
+
+evidence 를 따로 넣었더니 품질이 더 상승했지만, evidence가 너무 긴 경우 
+evidence 에서도 텍스트가 잘려 몇몇 질의에 대해서 rerank 스코어가 너무 낮게 나왔다. 
+
+따라서 기존 방법을 고수하되, evidence 를 찾으면 그 evidecne 의 윗 내용 500자 를 덧붙여 
+evidence에 넣기로 했다. 
+
+또, evidence 1 , evidence 2 가 너무 길게 되면 본문길이가 짧아져 의도파악이 안될수도 있으므로 
+evidence 1 , 2 의 score를 비교해, 높은 score에 더 긴 text를 붙여주고, 낮은 score에는 짧은 score를 
+붙여주기로 했다. 만약 evidence가 동일하다면, 더 긴 text를 붙여주기로 했다. 
+
+### 비교 
+
+strategy = 1.weighted_75_25
+total_score = 75.60000000000001
+avg_score = 0.9333
+matched_within_top3 = 78
+low_score_queries(<= 0.4) = 4
+top1_accuracy = 0.8765
+top5_hit_count = 81
+miss_count = 0 
+
+성능이 좀 떨어졌다 이유 분석해보겠다.
+
+### 
