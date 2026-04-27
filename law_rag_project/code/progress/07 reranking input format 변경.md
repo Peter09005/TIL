@@ -34,3 +34,51 @@ hybrid top 15를 뽑고 해당 조문과 query랑 같이 넣는다면 핵심 정
 
 이렇게 구상한다면, body_text와 어느정도 문맥을 가져갈슀고, evidence_sparse , bm25 를 통해 핵심 문맥을 미리 넣어줄수있다. 
 
+현재 사용하는 기법은 위와 유사하지만, bm25 , sparse 가 같은 내용을 가르킬때 같은 내용이 중복되서 들어가는 문제도 있었고, 쓸때없는 애노테이션 , law_article이 "law::main::2" 이런식으로 들어가는 문제가 있었다. 
+
+
+## 변경 전 
+~~~
+[조문번호] {article_no}
+[조문제목] {article_title}
+
+[핵심 근거]
+- {sparse raw chunk 1개}
+- {bm25 raw chunk 1개}
+
+[본문]
+{representative full_text}
+~~~
+
+## 변경 후 
+~~~[법령명] 식품위생법
+[조문번호] {article_no}
+[조문제목] {article_title}
+
+[핵심 근거]
+- {sparse/BM25 hit를 parent context로 확장한 evidence}
+
+[본문]
+{annotation 제거된 clean body_text}
+
+--fall back--
+hang/paragraph 없음 → ho/item  
+ho/item 없음 → article header + lead_text + hit_text  
+그것도 없음 → hit_text
+~~~
+
+
+## A/B 테스트 결과 
+
+### A 결과 (변경 후)
+
+strategy = 1.weighted_75_25
+total_score = 76.20000000000002
+avg_score = 0.9407
+matched_within_top3 = 78
+low_score_queries(<= 0.4) = 3
+top1_accuracy = 0.8889
+top5_hit_count = 81
+miss_count = 0
+
+### B결과 (변경 후)

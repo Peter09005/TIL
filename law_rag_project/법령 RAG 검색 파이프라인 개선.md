@@ -657,13 +657,13 @@ scores = reranker.compute_score(pairs, normalize=True)
 ```
 
 ---
-### 9. 상위 10개 rerank  
+### 9. 상위 15개 rerank  
   
 fusion ranking이 끝났다고 바로 final이 되는 것은 아니다.    
 상위 후보만 다시 cross-encoder reranker로 재평가한다.  
   
 기본값:  
-- `RERANK_TOP_K = 10  
+- `RERANK_TOP_K = 15  
 - reranker model: `BAAI/bge-reranker-v2-m3`  
   
 동작:  
@@ -701,10 +701,10 @@ rerank 모델을 bge-reranker-v2-m3 을 쓰다보니, 의미 분석은 잘해주
 ```text
 1. dense / sparse / bm25로 chunk-level search 수행
 2. hybrid score 계산
-3. chunk 후보 top10 확보
+3. chunk 후보 top15 확보
 4. article_uid 기준 grouping / dedup
 5. unique article candidate 생성
-6. article candidate passage 생성
+6. reranker input 생성 
 7. Cross-Encoder reranker 적용
 8. rerank_score 기준 final top3 출력
 ```
