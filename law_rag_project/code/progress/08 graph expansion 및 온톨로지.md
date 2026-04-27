@@ -52,3 +52,14 @@ reranker + hybrid
 기존에는 **reranker** 에 넣을때 계층 연결을 상위 문맥으로 연결했지만 
 **graph** 를 쓰면 더 좋은 reranker input을 넣을수있을거라 기대한다. 
 
+## 개선안 1 
+
+**neo4j** + **lang chain** 기법으로 hybrid top 15에 대해 graph ontology 생성 후 
+해당 데이터 reranker에 넣기
+
+
+## 개선안 2 
+
+**색인** 이전 데이터에 **LLM** 을 활용해 chunk 단위에 **Contextual Retrieval** 데이터 붙이기 
+-> **BGE
+
