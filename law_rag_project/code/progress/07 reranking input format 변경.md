@@ -82,3 +82,13 @@ top5_hit_count = 81
 miss_count = 0
 
 ### B결과 (변경 후)
+
+total_score = 76.9
+avg_score = 0.9494
+matched_within_top3 = 79
+low_score_queries(<= 0.4) = 3
+top1_accuracy = 0.9012
+top5_hit_count = 81
+miss_count = 0
+
+A/B 에 비해 더 좋은 결과를 냈다!
