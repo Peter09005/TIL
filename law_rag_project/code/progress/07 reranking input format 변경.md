@@ -154,3 +154,18 @@ miss_count = 0
 해당 후보의 text를 반드시 전부 넣고, 상위문맥은 text 이전까지만 넣게해 문맥을 고려하게 설계해 보겠다. 
 
 
+### result 
+
+[[12 rerank with diffrent format#상위 문맥 + 핵심 키워드 무조건 넣기]]
+
+strategy = 1.weighted_75_25
+total_score = 76.90000000000002
+avg_score = 0.9494
+matched_within_top3 = 79
+low_score_queries(<= 0.4) = 2
+top1_accuracy = 0.8889
+top5_hit_count = 81
+miss_count = 0
+
+더 괜찮아지긴 한거같은데.. 좀 애매함 
+확실히 low_score_queries 는 많이 없어지긴했는데 
