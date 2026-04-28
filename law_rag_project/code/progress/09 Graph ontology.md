@@ -9,4 +9,4 @@ chunk 945 기준 ->
 -> 항 / 호 / 목 단위로 관계 추출 
 
 04_chunk -> open api -> neo4j + langchain 방식으로 graph ㄱㅈㅇ~ 
-
+ 
