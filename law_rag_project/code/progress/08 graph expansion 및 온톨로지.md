@@ -33,7 +33,7 @@ reranker + hybrid
 하이브리드 
  |
  |
-보강 - graph ontology
+보강 - graph 도입
  |
  | 
 reranker + hybrid 
