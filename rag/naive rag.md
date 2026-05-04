@@ -15,6 +15,3 @@ however, this naive RAG suffers from several limitations.
 - generation difficulties 
 - augmentation hurdles 
 
-
-롤 / 
-
