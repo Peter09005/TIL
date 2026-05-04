@@ -172,3 +172,4 @@ hugging face , ollama 쓰면 될듯
 
 
 걍 테이블 -> 임베딩 
+
