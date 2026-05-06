@@ -121,4 +121,6 @@ LangSmith
 ~~~
 python 
 sql 
+milvus 
+온톨로지 개념
 ~~~
