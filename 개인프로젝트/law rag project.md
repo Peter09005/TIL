@@ -81,7 +81,7 @@ metadata 부착
 
 세무사 질문
 ↓
-쿼리 rewrite 
+쿼리 rewrite + confidence if low, 역질문 
 ↓
 metadata filter
 ↓
@@ -89,7 +89,7 @@ hybrid search (vector + bm25) + llm hypotheical query embedding
 ↓
 reranking (bge-m3)
 ↓
-근거 chunk 선택
+근거 chunk 선택 if confidence low -> llm -> hybrid search 
 ↓
 LLM 답변 생성
 ↓
