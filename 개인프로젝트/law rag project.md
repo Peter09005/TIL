@@ -1,7 +1,7 @@
 
 ## 프로젝트 목표
 ~~~
-"주택 양도세 비과세 판단을 위해 법령·예규·판례 근거를 빠르게 큐레이션하는 세무사 전용 RAG 에이전트
+주택 양도세 비과세 판단을 위해 법령·예규·판례 근거를 빠르게 큐레이션하는 세무사 전용 RAG 에이전트
 ~~~
 
 ## rag 품질 및 평가 
@@ -83,25 +83,17 @@ metadata 부착
 ↓
 쿼리 rewrite 
 ↓
-케이스 분류
-- 주택?
-- 토지?
-- 상속?
-- 증여?
-- 1세대 1주택?
-- 다주택?
-↓
 metadata filter
 ↓
-hybrid search (vector + bm25)
+hybrid search (vector + bm25) + llm hypotheical query embedding 
 ↓
-reranking
+reranking (bge-m3)
 ↓
 근거 chunk 선택
 ↓
 LLM 답변 생성
 ↓
-답변 검증
+답변 검증 
 ↓
 멘트 출력 
 ~~~
@@ -109,4 +101,16 @@ LLM 답변 생성
 ## 모니터링 
 ~~~
 LangSmith 
+~~~
+
+
+## LLM 호출 포인트 
+~~~
+1. 질문 시나리오, 속성 추출 
+   
+2. 정보 누락 판단 및 역질문 생성 
+   
+3. RAG 기반 근거 매칭 및 추론 
+   
+4. 출력 
 ~~~
